@@ -2,11 +2,10 @@
 using CustomerTestApi.Models;
 using CustomerTestApi.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
 
 namespace CustomerTestApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
