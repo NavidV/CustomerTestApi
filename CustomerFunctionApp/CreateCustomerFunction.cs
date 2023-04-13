@@ -16,16 +16,18 @@ namespace Company.Function
     {
         [FunctionName("CreateCustomer")]
         public static CreatedResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "CreateCustomer")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "createcustomer")] HttpRequest req,
             ILogger log,
-            [Sql("dbo.Customer", ConnectionStringSetting = "ConnectionStrings:get")] out Customer customer)
+            [Sql("dbo.Customer",
+            CommandType = System.Data.CommandType.Text,
+            ConnectionStringSetting = "ConnectionStrings:get")] out Customer customer)
         {
             string requestBody =  new StreamReader(req.Body).ReadToEnd();
             
             customer = JsonConvert.DeserializeObject<Customer>(requestBody);
 
          
-            return new CreatedResult($"/api/CreateCustomer", customer);
+            return new CreatedResult($"/api/createcustomer", customer);
         }
     }
 }

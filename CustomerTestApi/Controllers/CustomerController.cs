@@ -19,8 +19,7 @@ namespace CustomerTestApi.Controllers
             this._response = new CustomerResponse();
         }
         [HttpGet]
-        [Route("{id}")]
-        public async Task <ActionResult<CustomerResponse>>Get(int id)
+        public async Task<ActionResult<CustomerResponse>> Get(int id)
         {
             try
             {
@@ -38,13 +37,13 @@ namespace CustomerTestApi.Controllers
                 _response.IsSuccess = false;
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
+                return new ObjectResult(_response) { StatusCode = 500 };
             }
             return Ok(_response);
         }
 
         [HttpPost]
-        [Route("{id}")]
-        public async Task<ActionResult<CustomerResponse>> Post(Customer customerDto )
+        public async Task<ActionResult<CustomerResponse>> Post(Customer customerDto)
         {
             try
             {
@@ -56,8 +55,9 @@ namespace CustomerTestApi.Controllers
                 _response.IsSuccess = false;
                 _response.ErrorMessages
                      = new List<string>() { ex.ToString() };
+                return new ObjectResult(_response) { StatusCode = 500 };
             }
-            return Ok(_response);
+            return CreatedAtAction(nameof(Post), _response);
         }
     }
 }

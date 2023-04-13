@@ -38,7 +38,7 @@ namespace CustomerTestApi.Services.Services
 
         public async Task<Customer> CreateCustomerAsync(Customer customer)
         {
-            string postUrl = "http://localhost:7042/api/CreateCustomer";
+            string postUrl = baseUrl + "createcustomer";
 
             var client = _httpClient.CreateClient("CustomerFunctionAPi");
             HttpRequestMessage message = new HttpRequestMessage();
