@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 using CustomerFunctionApp.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +5,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Company.Function
 {
@@ -22,11 +19,11 @@ namespace Company.Function
             CommandType = System.Data.CommandType.Text,
             ConnectionStringSetting = "ConnectionStrings:get")] out Customer customer)
         {
-            string requestBody =  new StreamReader(req.Body).ReadToEnd();
-            
+            string requestBody = new StreamReader(req.Body).ReadToEnd();
+
             customer = JsonConvert.DeserializeObject<Customer>(requestBody);
 
-         
+            log.LogInformation("CreateCustomer function processed a request.");
             return new CreatedResult($"/api/createcustomer", customer);
         }
     }
