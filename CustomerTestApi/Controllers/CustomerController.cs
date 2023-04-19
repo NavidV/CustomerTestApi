@@ -27,6 +27,7 @@ namespace CustomerTestApi.Controllers
                 if (customers.Count == 0)
                 {
                     _response.DisplayMessage = "Customer does not exist!";
+                    _response.Result = new object();  
                     return NotFound(_response);
                 }
                 _response.Result = customers;
